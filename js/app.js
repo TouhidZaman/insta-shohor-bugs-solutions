@@ -157,11 +157,14 @@ const displayLikedPosts = () => {
 };
 
 const displayReportedPosts = () => {
+    //bug fixed: post duplication removed for reported post
+    const reportedPostField = document.getElementById( "reported" );
+    reportedPostField.textContent = '';
     const reportedPosts = getReportedPosts();
     //bug fixed - all posts was showing instead of reported post
     reportedPosts.forEach((post) => {
         const div = createPost(post);
-        document.getElementById( "reported" ).appendChild(div);
+        reportedPostField.appendChild(div);
     });
 };
 
