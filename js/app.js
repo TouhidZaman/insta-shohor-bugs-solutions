@@ -34,18 +34,21 @@ const displayContent = (text) => {
 const switchTab = (id) => {
     if (id === "posts") {
         document.getElementById( "posts" ).style.display = "grid";
+        document.getElementById( "js-faq-section" ).style.display = "block";
         document.getElementById( "liked" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
-    } else if (id === "liked") {
+      } else if (id === "liked") {
         document.getElementById( "liked" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
-
+        document.getElementById( "js-faq-section" ).style.display = "none";
+        
         displayLikedPosts();
-    } else {
+      } else {
         document.getElementById( "reported" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "liked" ).style.display = "none";
+        document.getElementById( "js-faq-section" ).style.display = "none";
 
         displayReportedPosts();
     }
@@ -149,6 +152,7 @@ const displayLikedPosts = () => {
     //bug fixed: post duplication removed for liked post
     const likedPostField = document.getElementById( "liked" );
     likedPostField.textContent = '';
+    likedPostField.innerHTML = `<h1>Liked posts</h1>`;
     const likedPosts = getLikedPosts();
     likedPosts.forEach((post) => {
         const div = createPost(post);
@@ -160,6 +164,7 @@ const displayReportedPosts = () => {
     //bug fixed: post duplication removed for reported post
     const reportedPostField = document.getElementById( "reported" );
     reportedPostField.textContent = '';
+    reportedPostField.innerHTML = `<h1>Reported posts</h1>`;
     const reportedPosts = getReportedPosts();
     //bug fixed - all posts was showing instead of reported post
     reportedPosts.forEach((post) => {
