@@ -11,18 +11,28 @@ const getReportedPosts = () => {
     return posts.filter((post) => reportedPostsId.includes(post.id));
 };
 
+//Added to get unreported posts
+const getRemainingPosts = () => {
+    return posts.filter((post) => !reportedPostsId.includes(post.id));
+};
+
 const isLiked = (id) => {
     return likedPostsId?.length && !!likedPostsId.includes(id);
 };
 
 const addToLiked = (id) => {
     likedPostsId.push(id); //Bug Fixed: Array insertion was incorrect
-    showPosts(posts);
+
+    //Bug fixed: like button click was pointing to all post instead of unreported posts only
+    const unreportedPosts = getRemainingPosts(); //To get unreported posts only
+    showPosts(unreportedPosts);
 };
 
 const reportPost = (id) => {
     reportedPostsId.push(id);
-    const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
+    
+    //Code adjusted to fix bug in like post
+    const remainingPosts = getRemainingPosts(); //To get unreported posts only
     showPosts(remainingPosts);
 };
 
